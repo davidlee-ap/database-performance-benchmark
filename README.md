@@ -1,5 +1,5 @@
-# Database Performance Benchmark
-<h1 align="center">CS587 Project Part 1</h1><br>
+<h1 align="center">Database Performance Benchmark</h1><br>
+<h2 align="center">CS587 Project Part 1</h1><br>
 <p align="center">
 <b>Chunwei Li</b><br>
 <b>Ajinkya Shinde</b><br>
