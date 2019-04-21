@@ -84,7 +84,7 @@ def generatetuple(numOfTuple):
                  fiftyPercent, unique3, evenOnePercent, \
                  oddOnePercent, stringu1, stringu2, string4)
     
-    generatedatafile(tuples, 'data/TENKTUP2.log')
+    generatedatafile(tuples, 'data/TENKTUP2.csv')
     #insertuple(tuples)
 
 def generatedatafile(tuples, fname):
