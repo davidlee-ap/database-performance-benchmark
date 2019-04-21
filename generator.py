@@ -2,6 +2,8 @@
 #Project: database performance benchmark
 #
 #Author: Chunwei Li
+         Ajinkya Shinde
+    
 #Date  : 4-14-2019
 #
 from google.cloud import bigquery
