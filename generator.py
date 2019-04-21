@@ -2,7 +2,7 @@
 #Project: database performance benchmark
 #
 #Author: Chunwei Li
-         Ajinkya Shinde
+#        Ajinkya Shinde
     
 #Date  : 4-14-2019
 #
