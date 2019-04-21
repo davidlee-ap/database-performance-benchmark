@@ -22,7 +22,8 @@
 3. Loaded data to the system
 
 	We loaded csv data file into BigQuery system. Here is a screenshot demonstrating our work.
-Lessons and Issues
+	
+4.  Lessons and Issues
 	We learned how to setup and configure BigQuery of Google Cloud, how to use BigQuery API to access and operate on dataset of BigQuery, how to retrieve data, insert data and update data from BigQuery dataset.
 	We encountered two issues about BigQuery. One is that we failed to insert all tuples into table because of quota and permission issue according to response code 403 from Google Cloud which is not allowed to insert data as fast as you want. The other is that loaded tuples are garbled, so we have to sort by field unique2 when retrieving data.
 
