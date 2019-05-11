@@ -1,18 +1,18 @@
 '''
 Author: Ajinkya Shinde
+		Chunwei Li
 '''
 import random
 import csv
 import os
-from google.cloud import bigquery
-
+import psycopg2
 
 global generator,prime
 
 def convert_uniq_to_str_uniq(unique):
 
-	print('inside convert_uniq_to_str_uniq')
-	print(unique)
+	# print('inside convert_uniq_to_str_uniq')
+	# print(unique)
 	result = ""
 
 	for i in range(7):
@@ -27,7 +27,7 @@ def convert_uniq_to_str_uniq(unique):
 
 
 	t1 = tmp*len(tmp)+result[len(tmp)+1:]+'x'*45
-	print('result is',t1)
+	# print('result is',t1)
 
 	return t1
 
@@ -99,9 +99,30 @@ def insert_data_bigquery(fname):
 
 
 
+# newpass123
+
+def insert_data_postgres(tname, fname):
+	file1 = open(fname)
+	next(file1)
+	conn = psycopg2.connect("dbname=postgres user=postgres password=FeQALL_5697")
+	conn.autocommit = True
 
 
+	cur = conn.cursor()
+	table_str = tname.split(".")
+	cur.execute("SELECT datname FROM pg_catalog.pg_database WHERE lower(datname) = lower(\'"+table_str[0]+"\');")
 
+	if len(cur.fetchall()) == 0:
+		cur.execute("CREATE DATABASE "+table_str[0]+";")
+	conn.close()
+	conn1 = psycopg2.connect("dbname="+table_str[0]+" user=postgres password=FeQALL_5697")
+	conn1.autocommit = True
+	cur1 = conn1.cursor()
+	cur1.execute("CREATE TABLE "+table_str[1]+"(unique1 integer,unique2 integer primary key,two integer,four integer,ten integer,twenty integer,onePercent integer,tenPercent integer,twentyPercent integer,fiftyPercent integer,unique3 integer,evenOnePercent integer,oddOnePercent integer,stringu1 text,stringu2 text,string4 text);")
+	cur1.copy_from(file1, table_str[1], sep=",")
+	cur1.execute("SELECT * FROM "+table_str[1]+" ;")
+	print(cur1.fetchall())
+	conn1.close()
 
 
 
@@ -123,7 +144,7 @@ def randValue(seed,limit):
 
 
 def generate_relation(tupCount):
-	print('inside generate relation function')
+	# print('inside generate relation function')
 	global generator
 
 	seed = generator
@@ -154,27 +175,33 @@ def generate_relation(tupCount):
 	rnd_str4_2 = rnd_str4_1[:tupCount-len(rnd_str4_1)]
 	string4 = rnd_str4_1 + rnd_str4_2 
 
-	print('unique1',unique1)
-	print('unique2',unique2)
-	print('two',two)
-	print('four',four)
-	print('ten',ten)
-	print('twenty',twenty)
-	print('onePercent',onePercent)
-	print('onePercent',onePercent)
-	print('onePercent',onePercent)
-	print('onePercent',onePercent)
-	print('unique3',unique3)
-	print('stringu1',stringu1)
-	print('stringu2',stringu2)
-	print('string4',string4)
+	# print('unique1',unique1)
+	# print('unique2',unique2)
+	# print('two',two)
+	# print('four',four)
+	# print('ten',ten)
+	# print('twenty',twenty)
+	# print('onePercent',onePercent)
+	# print('onePercent',onePercent)
+	# print('onePercent',onePercent)
+	# print('onePercent',onePercent)
+	# print('unique3',unique3)
+	# print('stringu1',stringu1)
+	# print('stringu2',stringu2)
+	# print('string4',string4)
 
 	rows = zip(unique1,unique2,two,four,ten,twenty,onePercent,tenPercent,twentyPercent,fiftyPercent,unique3,evenOnePercent,oddOnePercent,stringu1,stringu2,string4)	
-	
-	filename = './data/TENKTUP1.csv'
+
+	tablename = input("Enter table name")
+	filename = 	'data\\'+tablename+'.csv'
+	# file_list = ['data\\TENKTUP1.csv','data\\TENKTUP2.csv','data\\ONEKTUP.csv']
+	# table_list = ['TENKTUP1','TENKTUP2','ONEKTUP']
 
 	generate_dataset(rows,filename)	
-	insert_data_bigquery(filename)
+	# insert_data_bigquery(filename)
+	# print(filename)
+	insert_data_postgres('wisconsinbenchmk.'+tablename,filename)
+	# insert_data_postgres('wisconsinbenchmk.a','data\\ONEKTUP.csv')
 
 
 def initialize():
@@ -216,7 +243,7 @@ def initialize():
 			print('Value for table size is not entered as int')
 			exit()
 
-	print('Calling generate_relation') 
+	# print('Calling generate_relation') 
 	generate_relation(tupCount)
 
 
