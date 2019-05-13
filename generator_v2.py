@@ -156,7 +156,7 @@ def generate_relation(tupCount):
 	ten = [each%10 for each in unique1]
 	twenty = [each%20 for each in unique1]
 	onePercent = [each%100 for each in unique1]
-	tenPercent = [each%10for each in unique1]
+	tenPercent = [each%10 for each in unique1]
 	twentyPercent = [each%5 for each in unique1]
 	fiftyPercent = [each%2 for each in unique1]
 	unique3 = unique1
