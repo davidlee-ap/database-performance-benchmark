@@ -1,6 +1,6 @@
 '''
 Author: Ajinkya Shinde
-		Chunwei Li
+        Chunwei Li
 '''
 import random
 import csv
@@ -99,7 +99,6 @@ def insert_data_bigquery(fname):
 
 
 
-# newpass123
 
 def insert_data_postgres(tname, fname):
 	file1 = open(fname)
